@@ -85,3 +85,12 @@ lower_bound_no_outliers = Q1_no_outliers - 1.5 * IQR_no_outliers
 upper_bound_no_outliers = Q3_no_outliers + 1.5 * IQR_no_outliers
 outliers_no_outliers = df_no_outliers[(df_no_outliers['TotalCharges'] < lower_bound_no_outliers) | (df_no_outliers['TotalCharges'] > upper_bound_no_outliers)]
 print(outliers_no_outliers.shape[0])
+
+df['날짜'].dt.year # 연도 
+df['날짜'].dt.month # 월 
+df['날짜'].dt.day # 일 
+df['날짜'].dt.hour # 시 
+df['날짜'].dt.minute # 분 
+df['날짜'].dt.second # 초 
+df['날짜'].dt.weekday # 요일 (0=월요일) 
+df['날짜'].dt.date # 날짜만 (datetime.date) df['날짜'].dt.time # 시간만 (datetime.time)
