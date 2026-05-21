@@ -3,7 +3,18 @@ df = pd.read_csv('https://raw.githubusercontent.com/Datamanim/datarepo/main/chur
 # Q1. df의 상위 5개 행을 출력하시오.
 print(df.head())
 # Q2. df의 행과 열의 개수를 출력하시오.
-print(df.shape)
+print(df.shape) 
+
+# 열만
+len(df.columns)
+# df.shape의 결과는 (행의 개수, 열의 개수) 형태의 튜플입니다.
+print(df.shape)     # 출력 예시: (10000, 5)
+# 여기서 두 번째 값([1])을 지정하면 열의 개수만 쏙 가져옵니다.
+col_count = df.shape[1]
+print(col_count)    # 출력 예시: 5
+
+
+
 # Q3. df의 컬럼명을 출력하시오.
 print(df.columns)
 # Q4. df의 데이터 타입을 출력하시오.
@@ -12,6 +23,12 @@ print(df.dtypes)
 print(df.isnull().sum())
 # Q6. df의 'TotalCharges' 컬럼의 데이터 타입을 float으로 변환하시오.
 df['TotalCharges'] = pd.to_numeric(df['TotalCharges'], errors='coerce')
+errors='raise': (기본값) 에러가 나면 코드를 중단합니다.
+errors='coerce': 에러가 나는 값은 무조건 NaN으로 뭉개고 진행합니다. (가장 애용됨)
+errors='ignore': 에러가 나면 타입을 바꾸지 않고 원본 그대로 둡니다.
+
+df['view_count'] = df['view_count'].astype('float')
+
 print(df['TotalCharges'].dtype)
 # Q7. df의 'TotalCharges' 컬럼의 결측치 개수를 출력하시오.
 print(df['TotalCharges'].isnull().sum())
@@ -51,41 +68,9 @@ print(outliers.shape[0])
 # Q21. df의 'TotalCharges' 컬럼의 이상치를 제거한 후, 상위 5개 행을 출력하시오.
 df_no_outliers = df[(df['TotalCharges'] >= lower_bound) & (df['TotalCharges'] <= upper_bound)]
 print(df_no_outliers.head())
-# Q22. df의 'TotalCharges' 컬럼의 이상치를 제거한 후, 행과 열의 개수를 출력하시오.
-print(df_no_outliers.shape)
-# Q23. df의 'TotalCharges' 컬럼의 이상치를 제거한 후, 결측치 개수를 출력하시오.
-print(df_no_outliers['TotalCharges'].isnull().sum())
-# Q24. df의 'TotalCharges' 컬럼의 이상치를 제거한 후, 평균값을 출력하시오.
-print(df_no_outliers['TotalCharges'].mean())
-# Q25. df의 'TotalCharges' 컬럼의 이상치를 제거한 후, 중앙값을 출력하시오.
-print(df_no_outliers['TotalCharges'].median())
-# Q26. df의 'TotalCharges' 컬럼의 이상치를 제거한 후, 최빈값을 출력하시오.
-print(df_no_outliers['TotalCharges'].mode()[0])
-# Q27. df의 'TotalCharges' 컬럼의 이상치를 제거한 후, 표준편차를 출력하시오.
-print(df_no_outliers['TotalCharges'].std())
-# Q28. df의 'TotalCharges' 컬럼의 이상치를 제거한 후, 분산을 출력하시오.
-print(df_no_outliers['TotalCharges'].var())
-# Q29. df의 'TotalCharges' 컬럼의 이상치를 제거한 후, 최소값을 출력하시오.
-print(df_no_outliers['TotalCharges'].min())
-# Q30. df의 'TotalCharges' 컬럼의 이상치를 제거한 후, 최대값을 출력하시오.
-print(df_no_outliers['TotalCharges'].max())
-# Q31. df의 'TotalCharges' 컬럼의 이상치를 제거한 후, 25% 분위값을 출력하시오.
-print(df_no_outliers['TotalCharges'].quantile(0.25))
-# Q32. df의 'TotalCharges' 컬럼의 이상치를 제거한 후, 50% 분위값을 출력하시오.
-print(df_no_outliers['TotalCharges'].quantile(0.5))
-# Q33. df의 'TotalCharges' 컬럼의 이상치를 제거한 후, 75% 분위값을 출력하시오.
-print(df_no_outliers['TotalCharges'].quantile(0.75))
-# Q34. df의 'TotalCharges' 컬럼의 이상치를 제거한 후, IQR을 출력하시오.
-Q1_no_outliers = df_no_outliers['TotalCharges'].quantile(0.25)
-Q3_no_outliers = df_no_outliers['TotalCharges'].quantile(0.75)
-IQR_no_outliers = Q3_no_outliers - Q1_no_outliers
-print(IQR_no_outliers)
-# Q35. df의 'TotalCharges' 컬럼의 이상치를 제거한 후, 이상치 개수를 출력하시오.
-lower_bound_no_outliers = Q1_no_outliers - 1.5 * IQR_no_outliers
-upper_bound_no_outliers = Q3_no_outliers + 1.5 * IQR_no_outliers
-outliers_no_outliers = df_no_outliers[(df_no_outliers['TotalCharges'] < lower_bound_no_outliers) | (df_no_outliers['TotalCharges'] > upper_bound_no_outliers)]
-print(outliers_no_outliers.shape[0])
 
+
+pd.to_datetime(df[], format=())
 df['날짜'].dt.year # 연도 
 df['날짜'].dt.month # 월 
 df['날짜'].dt.day # 일 
